@@ -1,30 +1,22 @@
 #include <stdio.h>
 #include <iostream>
 
-long combination(long a)
-{
-    int result = 1;
-    while(a)
-    {
-        result *= a;
-        a--;
-    }
-    return result;
-}
-
 int main(void)
 {
     int test_case = 0;
-    int EAST_pin, WEST_pin;
-    int result;
     std::cin >> test_case;
-    for(int a = 0; a < test_case; a--){
+    for(int a = 0; a < test_case; a++){
+        int EAST_pin, WEST_pin;
+        long long result = 1;
         std::cin >> WEST_pin;
         std::cin >> EAST_pin;
-        std::cout << combination(WEST_pin) << std::endl;
-        std::cout << combination(EAST_pin) << std::endl;
-        std::cout << combination(EAST_pin-WEST_pin) << std::endl;
-        result = combination(EAST_pin)/(combination(WEST_pin)*combination(EAST_pin-WEST_pin));
+        
+        int c = 1;
+        for(int i = EAST_pin; i > EAST_pin-WEST_pin; i--){
+            result = result * i;
+            result = result / c;
+            c++;
+        }
         std::cout << result << std::endl;
     }
     
